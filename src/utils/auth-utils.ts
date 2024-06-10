@@ -21,12 +21,12 @@ export function verifyToken(token: string, adminRequired:boolean=false): UserMod
     if (!token) throw new UnauthorizedError();
     
     try {        
-        const res = jwt.verify(token, appConfig.tokenSecreteKey) as { user: UserModel }; 
+        const res = jwt.verify(token, appConfig.tokenSecreteKey) as { userWithoutPassword: UserModel }; 
         
-        if (adminRequired && !res.user.isAdmin) {
+        if (adminRequired && !res.userWithoutPassword.isAdmin) {
             throw new Error("");            
         }
-        return res.user;
+        return res.userWithoutPassword;
 
     } catch (error) {
 

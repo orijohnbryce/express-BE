@@ -1,0 +1,101 @@
+API Documentation
+
+Overview
+    This API provides endpoints for managing users, products, and orders. 
+    The following sections describe the available endpoints, request parameters, and expected responses.
+
+Base URL
+    All endpoints are prefixed with http://localhost:4000/api/v1/
+
+Authentication
+    Register a New User
+        Endpoint: POST /api/v1/user
+
+        Request Body:        
+            {
+                "email": "user@example.com",
+                "password": "password123",
+                "name": "User Name"
+            }
+        Response:
+            201 Created: Returns a JWT token.
+
+    Login
+        Endpoint: POST /api/v1/user/login
+
+        Request Body:
+            {
+            "email": "user@example.com",
+            "password": "password123"
+            }
+        Response:
+            200 OK: Returns a JWT token.
+
+Products
+    Get All Products
+        Endpoint: GET /api/v1/products
+
+        Response:
+            200 OK: Returns an array of products.
+
+    Get Product by ID
+        Endpoint: GET /api/v1/products/:id
+
+        Response:
+
+        200 OK: Returns the product with the specified ID.
+        404 Not Found: If the product does not exist.
+
+    Add a New Product (Authenticated Users Only)
+        Endpoint: POST /api/v1/products
+
+        Headers:
+            Authorization: Bearer <token>
+        Request Body:
+            {
+                "name": "Product Name",
+                "price": 100,
+                "description": "Product Description"
+            }
+
+        Response:
+
+            201 Created: Product created successfully.
+
+Orders
+    Get Order by ID (Authenticated Users Only)
+        Endpoint: GET /api/v1/order/:id
+
+        Headers:
+            Authorization: Bearer <token>
+        Response:
+
+            200 OK: Returns the order with the specified ID.
+            404 Not Found: If the order does not exist.
+        
+    
+    Create a New Order (Authenticated Users Only)
+        Endpoint: POST /api/v1/order
+
+        Headers:
+            Authorization: Bearer <token>    
+        Request Body:
+            {
+                "productList": [1, 2, 3],
+                "comments": "Please deliver between 5-6 PM",
+                "date": "2024-06-10T14:48:00.000Z"
+            }
+        Response:
+
+        201 Created: Order created successfully.
+        Error Handling
+        400 Bad Request: Invalid input parameters.
+        401 Unauthorized: Missing or invalid authentication token.
+        404 Not Found: Requested resource does not exist.
+        500 Internal Server Error: Something went wrong on the server.
+        Notes
+
+
+Ensure to include the Authorization header with the Bearer token for endpoints that require authentication.
+All date formats should be in ISO 8601 format.
+For any issues or further assistance, please contact the backend team.

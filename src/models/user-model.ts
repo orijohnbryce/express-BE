@@ -2,6 +2,7 @@ import Joi from "joi";
 import { ValidationError } from "./exceptions";
 
 class UserModel {
+    id: number;
     username: string;
     password: string;
     email: string;
@@ -9,6 +10,7 @@ class UserModel {
     isAdmin: boolean;
     
     private static validateSchema = Joi.object({
+        id: Joi.number().optional().positive(),
         username: Joi.string().required().min(2).max(20),
         password: Joi.string().required().min(4).max(20),
         email: Joi.string().email(),
@@ -16,7 +18,8 @@ class UserModel {
         token: Joi.string().max(200).optional()
     })
 
-    constructor(user : UserModel) {
+    constructor(user: UserModel) {
+        this.id = user.id;
         this.username = user.username;
         this.password = user.password;
         this.email = user.email;

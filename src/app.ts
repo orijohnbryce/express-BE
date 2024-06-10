@@ -5,6 +5,7 @@ import authRouter from "./controllers/auth-controller";
 import { logError } from "./utils/helpers";
 import { appConfig } from "./utils/config";
 import { AppException, NotFoundError } from "./models/exceptions";
+import { orderRouter } from "./controllers/order-controller";
 
 // create rest-api app
 const app = express();
@@ -22,6 +23,7 @@ app.use(express.json());
 // add controllers
 app.use("/", productRouter);
 app.use("/", authRouter);
+app.use("/", orderRouter);
 
 // if route not found:
 app.use("/", (req: Request, res: Response, next: NextFunction) => {

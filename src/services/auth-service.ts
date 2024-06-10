@@ -6,15 +6,26 @@ import { createToken } from "../utils/auth-utils";
 export async function createUser(user: UserModel) {
   user.validate();
 
+  // create user (new id will generated)
+  let q = `insert into user (username, email, password) values (?, ?, ?)`;      
+  console.log(q);
+  await runQuery(q, [user.username, user.email, user.password]); 
+
+  
+  // get create id
+  q = `select id from user where email=?`;
+  const res = await runQuery(q, [user.email]);    
+  user.id = res[0].id;
+  
+  
+  // create new token and save it to db
   user.token = createToken(user);
+  q = 'update user set token=? where email=?';
+  await runQuery(q, [user.token, user.email]);
 
-  const q = `insert into user (username, email, password, token) 
-                values ('${user.username}', '${user.email}', 
-                '${user.password}', '${user.token}')`;
-
-  await runQuery(q); // response is empty
   return user.token;
 }
+
 
 export async function login(email: string, password: string) {
   /* if credentials are OK, will return new token (and save it in db)  */

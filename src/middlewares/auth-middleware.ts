@@ -5,7 +5,8 @@ import { verifyToken as vt } from "../utils/auth-utils";
 export function verifyTokenMW(req: Request, res: Response, next: NextFunction) {
     try {          
         const token = req.header("Authorization")?.substring(7);                         
-        vt(token);        
+        const user = vt(token);
+        res.locals.user = user;                
         next()
     } catch (error) {
         next(error)
