@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "ES6",   
     "esModuleInterop": true, // allowed import-export
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "outDir": "build" // where the compiled js files will go to be run
   }
 }

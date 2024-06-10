@@ -2,6 +2,9 @@ import fs from "fs";
 import { runQuery } from "./dal";
 import path from "path";
 
+// import { URL } from 'url';
+// const __dirname = new URL('.', import.meta.url).pathname;
+
 export async function initDB(force = true) {
   const dbPath = path.resolve(__dirname, "./sqlite.db");
   if (fs.existsSync(dbPath)) {
