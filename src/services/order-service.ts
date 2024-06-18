@@ -5,8 +5,10 @@ import { OrderProductModel } from "../models/order-product-model";
 import UserModel from "../models/user-model";
 
 export async function getOrder(id: number) {
+  console.log(id);
+
   const orderRes: OrderModel[] = await runQuery(
-    'select * from "order" where id=?;',
+    "select * from `order` where id=?;",
     [id]
   );
   if (orderRes.length !== 1) {
@@ -15,7 +17,7 @@ export async function getOrder(id: number) {
   const order = orderRes[0];
 
   const products = await runQuery(
-    'select productId, quantity from "order_product" where orderId=?',
+    "select productId, quantity from `order_product` where orderId=?",
     [id]
   );
   const productObjects = products.map((p) => {

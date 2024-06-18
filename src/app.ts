@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
-import { initDB } from "./db/initDB.ts";
+import { initDB } from "./db/initDB";
 import productRouter from "./controllers/product-controller";
 import authRouter from "./controllers/auth-controller";
 import { logError } from "./utils/helpers";
@@ -11,9 +11,9 @@ import { orderRouter } from "./controllers/order-controller";
 const app = express();
 
 // log
-app.use("/", async (req: Request, res: Response, next: NextFunction) => {    
-    console.log(`${req.method} Call: ${req.url}`);
-    
+app.use("/", async (req: Request, res: Response, next: NextFunction) => {
+  console.log(`${req.method} Call: ${req.url}`);
+
   next();
 });
 
@@ -49,18 +49,21 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
   }
 });
 
-// init db if needed  (arg="true" means init anyway)
-initDB(false).then(() => {
-  app.listen(appConfig.port, () => {
-    console.log(
-      `\n\nStart listening on:\nhttp://localhost:${appConfig.port}/\n\n`
-    );
-  });
+// init db if needed.
+// WARNING: initDb is async function.
+// initDB()
+
+app.listen(appConfig.port, () => {
+  console.log(`\n\nStart listening on:\nhttp://localhost:${appConfig.port}/`);
+
+  console.log(`
+End-points:
+POST localhost:${appConfig.port}/api/v1/products
+GET localhost:${appConfig.port}/api/v1/products
+GET localhost:${appConfig.port}/api/v1/products/:id
+POST localhost:${appConfig.port}/api/v1/user
+POST localhost:${appConfig.port}/api/v1/user/login
+GET localhost:${appConfig.port}/api/v1/order/:id
+POST localhost:${appConfig.port}/api/v1/order
+      `);
 });
-
-
-// app.listen(appConfig.port, () => {
-//   console.log(
-//     `\n\nStart listening on:\nhttp://localhost:${appConfig.port}/\n\n`
-//   )
-// })
