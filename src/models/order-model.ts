@@ -1,13 +1,15 @@
 import ProductModel from "./product-model";
 
 class OrderModel {
-    id: number;
+    id?: number;
     userId: number;
     products: ProductModel[] | object[];
     date: Date;
     comments: string;
 
-    constructor(userId: number, products: ProductModel[] | object[], date: Date = new Date(), comments: string = "", id: number=null) {
+    constructor(userId: number, products: ProductModel[] | object[], date: Date = new Date(),
+        comments: string = "", id?: number)
+    {
         this.id = id;
         this.userId = userId;
         this.products = products;

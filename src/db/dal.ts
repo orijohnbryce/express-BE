@@ -12,7 +12,7 @@ import sqlite3  from "sqlite3";
 const dbPath = path.resolve(__dirname, "./sqlite.db");
 
 // Function to run an SQL query
-export function runQuery(query, qParams: any[] = []): Promise<any[]> {
+export function runQuery(query: string, qParams: any[] = []): Promise<any[]> {
   return new Promise((resolve, reject) => {
     // Open the database
     const db = new sqlite3.Database(dbPath, (err: any) => {

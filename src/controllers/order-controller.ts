@@ -38,7 +38,7 @@ orderRouter.post(
       await createOrder(response.locals.user, date, comments, productList);
       response.status(StatusCode.Created).json("created");
     } catch (error) {
-      throw new UnknownError(error);
+      throw new UnknownError(error as string);
     }
   }
 );

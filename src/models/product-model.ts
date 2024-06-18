@@ -1,6 +1,8 @@
 import Joi from "joi";
 import { ValidationError } from "./exceptions";
 
+// import { ValidationError } from "./exceptions";
+
 class ProductModel {
   id: number;
   name: string;
@@ -21,7 +23,9 @@ class ProductModel {
     const res = ProductModel.validateSchema.validate(this);
 
     // if (res.error?.message) throw new ValidationError(res.error.message)
-    if (res.error?.details?.length > 0)
+    // if (res.error?.details?.length > 0)
+    //   throw new ValidationError(res.error.details[0].message);
+    if (res.error)
       throw new ValidationError(res.error.details[0].message);
   }
 

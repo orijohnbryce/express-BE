@@ -7,9 +7,10 @@ WORKDIR /usr/src/app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Clear npm cache and install dependencies
-RUN npm cache clean --force
 RUN npm install
+
+# excecuter for typescript
+RUN npm i -g ts-node 
 
 # Copy the rest of the application code
 COPY . .
@@ -21,6 +22,6 @@ RUN npm run build
 EXPOSE 4000
 
 # Define the command to run the app
-# CMD ["npm", "start"]
+CMD ["npm", "start"]
 
-CMD ["node --es-module-specifier-resolution=node .\build\app.js"]
+# CMD ["node --es-module-specifier-resolution=node .\build\app.js"]

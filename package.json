@@ -1,10 +1,13 @@
 {
   
   "name": "my-express-app",  
-  "version": "1.0.0",  
+  "version": "1.0.0",
+  "type": "commonjs",
+  "main": "app.js",
   "description": "",
   "scripts": {
-    "start": "nodemon --exec ts-node src/app.ts",    
+    "start": "nodemon --exec ts-node --esm src/app.ts",    
+    "start_": "ts-node --esm src/app.ts",    
     "build": "tsc"
   },
   "keywords": [],

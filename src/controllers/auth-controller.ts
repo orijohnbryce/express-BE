@@ -17,8 +17,8 @@ authRouter.post(
 
       const token = await createUser(um);
       res.status(StatusCode.Created).json(token);
-    } catch (error) {
-      if (error.message.includes("UNIQUE constraint failed: user.email")) {
+    } catch (error: any) {
+      if (error?.message?.includes("UNIQUE constraint failed: user.email")) {
         next(new ValidationError("Email already taken."));
       } else next(error);
     }

@@ -4,7 +4,7 @@ import { verifyToken as vt } from "../utils/auth-utils";
 
 export function verifyTokenMW(req: Request, res: Response, next: NextFunction) {
     try {          
-        const token = req.header("Authorization")?.substring(7);                         
+        const token = req.header("Authorization")?.substring(7) || "";                         
         const user = vt(token);
         res.locals.user = user;                
         next()
@@ -15,7 +15,7 @@ export function verifyTokenMW(req: Request, res: Response, next: NextFunction) {
 
 export function verifyTokenAdminMW(req: Request, res: Response, next: NextFunction) {
     try {          
-        const token = req.header("Authorization")?.substring(7);                         
+        const token = req.header("Authorization")?.substring(7) as string;
         vt(token, true);
         next()
     } catch (error) {

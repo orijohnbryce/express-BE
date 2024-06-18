@@ -4,7 +4,7 @@ import { ValidationError } from "./exceptions";
 class UserModel {
     id: number;
     username: string;
-    password: string;
+    password?: string;
     email: string;
     token: string;
     isAdmin: boolean;
@@ -31,8 +31,10 @@ class UserModel {
         const res = UserModel.validateSchema.validate(this);        
         
         // if (res.error?.message) throw new ValidationError(res.error.message)
-        if (res.error?.details?.length > 0)            
-            throw new ValidationError(res.error.details[0].message)
+        // if (res.error?.details?.length > 0)            
+        //     throw new ValidationError(res.error.details[0].message)
+        if (res.error)
+            throw new ValidationError(res.error.details[0].message);
     }
 }
 

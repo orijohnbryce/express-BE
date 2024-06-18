@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from "express";
-import { initDB } from "./db/initDB";
+import { initDB } from "./db/initDB.ts";
 import productRouter from "./controllers/product-controller";
 import authRouter from "./controllers/auth-controller";
 import { logError } from "./utils/helpers";
@@ -57,3 +57,10 @@ initDB(false).then(() => {
     );
   });
 });
+
+
+// app.listen(appConfig.port, () => {
+//   console.log(
+//     `\n\nStart listening on:\nhttp://localhost:${appConfig.port}/\n\n`
+//   )
+// })
