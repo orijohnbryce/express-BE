@@ -17,16 +17,12 @@ class ProductModel {
   private static validateSchema = Joi.object({
     name: Joi.string().required().min(2).max(20),
     price: Joi.number().required().positive(),
+    id: Joi.number().optional().positive(),
   });
 
   validate(): void {
-    const res = ProductModel.validateSchema.validate(this);
-
-    // if (res.error?.message) throw new ValidationError(res.error.message)
-    // if (res.error?.details?.length > 0)
-    //   throw new ValidationError(res.error.details[0].message);
-    if (res.error)
-      throw new ValidationError(res.error.details[0].message);
+    const res = ProductModel.validateSchema.validate(this);    
+    if (res.error) throw new ValidationError(res.error.details[0].message);
   }
 
   getInsertQuery() {

@@ -1,72 +1,69 @@
 {
-  
+  
   "name": "my-express-app",
-  
+  
   "version": "1.0.0",
-  
+  
   "type": "commonjs",
-  
+  
   "main": "app.js",
-  
+  
   "description": "",
-  
+  
   "scripts": {
-  
-    
+  
+    
   "start": "nodemon --exec ts-node --esm src/app.ts",
-  
-    
+  
+    
   "start_": "ts-node --esm src/app.ts",
-  
-    
+  
+    
   "build": "tsc"
-  
+  
   },
-  
+  
   "keywords": [],
-  
+  
   "author": "",
-  
+  
   "license": "ISC",
-  
+  
   "devDependencies": {
-  
-    
+  
+    
   "@types/express": "^4.17.21",
-  
-    
+  
+    
   "@types/node": "^20.12.13",
-  
-    
+  
+    
   "ts-node": "^10.9.2",
-  
-    
+  
+    
   "tsconfig-paths": "^4.2.0",
-  
-    
+  
+    
   "typescript": "^5.4.5"
-  
+  
   },
-  
+  
   "dependencies": {
-  
-    
+  
+    
   "@types/jsonwebtoken": "^9.0.6",
-  
-    
+  
+    
   "express": "^4.19.2",
-  
-    
+  
+    
   "joi": "^17.13.1",
-  
-    
+  
+    
   "jsonwebtoken": "^9.0.2",
-  
-    
-  "mysql2": "^3.10.1",
-  
-    
-  "sqlite3": "^5.1.7"
-  
+  
+    
+  "mysql2": "^3.10.1"
+  
   }
 }

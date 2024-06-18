@@ -2,7 +2,7 @@ API Documentation
 
 Overview
     This API provides endpoints for managing users, products, and orders. 
-    The DB-engine could be SQLITE or MYSQL. Choose it via src/utils/config.ts
+    
     The following sections describe the available endpoints, request parameters, and expected responses.
 
 Base URL
