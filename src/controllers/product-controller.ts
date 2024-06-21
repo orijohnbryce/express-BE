@@ -11,8 +11,7 @@ const productRouter = express.Router();
 // add new product - only for auth user
 productRouter.post(
   appConfig.routsPrefix + "products",
-  verifyTokenMW,
-  // verifyTokenAdminMW,
+  verifyTokenMW,  
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       await addProduct(new ProductModel(req.body));
