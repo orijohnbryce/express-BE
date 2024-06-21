@@ -3,7 +3,8 @@ import { addProduct, getProducts } from "../services/products-service";
 import ProductModel from "../models/product-model";
 import { appConfig } from "../utils/config";
 import { StatusCode } from "../models/status-enum";
-import { verifyTokenAdminMW, verifyTokenMW } from "../middlewares/auth-middleware";
+import {  verifyTokenMW } from "../middlewares/auth-middleware";
+
 
 const productRouter = express.Router();
 
@@ -24,7 +25,7 @@ productRouter.post(
 
 productRouter.get(
   appConfig.routsPrefix + "products",
-  async (request: Request, response: Response, next: NextFunction) => {
+  async (request: Request, response: Response, next: NextFunction) => {      
     try {
       const products = await getProducts();
       response.json(products);

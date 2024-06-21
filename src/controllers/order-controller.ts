@@ -3,8 +3,8 @@ import { appConfig } from "../utils/config";
 import { createOrder, getOrder } from "../services/order-service";
 import { verifyTokenMW } from "../middlewares/auth-middleware";
 import OrderModel from "../models/order-model";
-import { UnknownError } from "../models/exceptions";
 import { StatusCode } from "../models/status-enum";
+import { initDB } from "../db/initDB";
 
 export const orderRouter = express.Router();
 
@@ -38,7 +38,7 @@ orderRouter.post(
       await createOrder(response.locals.user, date, comments, productList);
       response.status(StatusCode.Created).json("created");
     } catch (error) {
-      throw new UnknownError(error as string);
+      next(error);
     }
   }
 );

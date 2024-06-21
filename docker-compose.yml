@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest    
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_DATABASE: 'oridb'
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    # networks:
+    #   - my-network
+
+  app:
+    build: .    
+    ports:
+      - "4000:4000"
+    # networks:
+    #   - my-network
+    depends_on:
+      - db
+
+# networks:
+#   my-network:
+
+volumes:
+  mysql-data:
+    # external: true  # use existing volume

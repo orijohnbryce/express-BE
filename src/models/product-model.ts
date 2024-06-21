@@ -1,5 +1,6 @@
 import Joi from "joi";
 import { ValidationError } from "./exceptions";
+import { UploadedFile } from "express-fileupload";
 
 // import { ValidationError } from "./exceptions";
 
@@ -7,6 +8,7 @@ class ProductModel {
   id: number;
   name: string;
   price: number;
+  image?: UploadedFile;
 
   constructor(pm: ProductModel) {
     this.name = pm.name;
@@ -18,6 +20,7 @@ class ProductModel {
     name: Joi.string().required().min(2).max(20),
     price: Joi.number().required().positive(),
     id: Joi.number().optional().positive(),
+    image: Joi.object().optional(),
   });
 
   validate(): void {

@@ -1,14 +1,12 @@
 import mysql from "mysql2";
 import { appConfig } from "../utils/config";
 
-// Configuration for the MySQL database connection
-const dbConfig = appConfig.dbConfig;
 
 // Function to run an SQL query
 export function runQuery(query: string, qParams: any[] = []): Promise<any[]> {
   return new Promise((resolve, reject) => {
     // Create a connection to the database
-    const connection = mysql.createConnection(dbConfig);
+    const connection = mysql.createConnection(appConfig.dbConfig);
 
     // Connect to the database
     connection.connect((err) => {

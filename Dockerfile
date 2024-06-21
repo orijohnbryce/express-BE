@@ -15,8 +15,8 @@ RUN npm i -g ts-node
 # Copy the rest of the application code
 COPY . .
 
-# Build the TypeScript code
-RUN npm run build
+# Build the TypeScript code  - not neseccery since we use ts-node
+# RUN npm run build
 
 # Expose the port the app runs on
 EXPOSE 4000
@@ -24,4 +24,3 @@ EXPOSE 4000
 # Define the command to run the app
 CMD ["npm", "start"]
 
-# CMD ["node --es-module-specifier-resolution=node .\build\app.js"]
