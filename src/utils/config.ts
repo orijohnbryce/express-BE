@@ -20,7 +20,7 @@ class DevAppConfig extends BaseAppConfig {
 
   readonly dbConfig = {
     ...this.dbConfig,
-    host: "localhost", // could be container name instead or external host as aws
+    host: 'localhost', // could be container name instead or external host as aws
     database: "oridb", // Replace with your MySQL database name
   };
 }
@@ -33,9 +33,9 @@ class ProdAppConfig extends BaseAppConfig {
 
   readonly dbConfig = {
     ...this.dbConfig,
-    host: "aws-s2-un24",
-    database: "mydb",
-    port: 3307,
+    host: process.env.DB_HOST,
+    database: process.env.DB_NAME,
+    port: process.env.DB_PORT,
   };
 }
 
