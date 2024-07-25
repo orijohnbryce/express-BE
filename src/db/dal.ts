@@ -1,34 +1,24 @@
 import mysql from "mysql2";
 import { appConfig } from "../utils/config";
 
+const connection = mysql.createPool({
+  host: appConfig.dbConfig.host,
+  user: appConfig.dbConfig.user,
+  password: appConfig.dbConfig.password,
+  database: appConfig.dbConfig.database,
+  port: 3306, // also default
+});
 
-// Function to run an SQL query
-export function runQuery(query: string, qParams: any[] = []): Promise<any[]> {
-  return new Promise((resolve, reject) => {
-    // Create a connection to the database
-    const connection = mysql.createConnection(appConfig.dbConfig);
-
-    // Connect to the database
-    connection.connect((err) => {
+function runQuery(queryString: string, qParams: any[] = []): Promise<any> {
+  return new Promise<any>((resolve, reject) => {
+    connection.query(queryString, qParams, (err, result) => {
       if (err) {
-        return reject(err); // Return early to prevent further code execution on error
+        reject(err);
+        return;
       }
-
-      // Run the query
-      connection.query(query, qParams, (err, results) => {
-        if (err) {
-          connection.end(); // Ensure the connection is closed on error
-          return reject(err); // Return early to prevent further code execution on error
-        }
-        resolve(results as any[]); // Resolve with the query results
-
-        // Close the connection
-        connection.end((err) => {
-          if (err) {
-            return reject(err); // Return early to prevent further code execution on error
-          }
-        });
-      });
+      resolve(result);
     });
   });
 }
+
+export { runQuery }; // then use dal.execute()
