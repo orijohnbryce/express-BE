@@ -6,7 +6,7 @@ const connection = mysql.createPool({
   user: appConfig.dbConfig.user,
   password: appConfig.dbConfig.password,
   database: appConfig.dbConfig.database,
-  port: 3306, // also default
+  port: appConfig.dbConfig.port, // also default
 });
 
 function runQuery(queryString: string, qParams: any[] = []): Promise<any> {
