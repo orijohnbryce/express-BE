@@ -10,16 +10,20 @@ import { orderRouter } from "./controllers/order-controller";
 import { imageRouter } from "./controllers/image-controller";
 import { dbRouter } from "./controllers/db-controller";
 import { boolean } from "joi";
+import doorman from "./middlewares/doorman-middleware";
 
 // create rest-api app
 const app = express();
 
+// doorman
+app.use("/", doorman)
+
 // log
 app.use("/", async (req: Request, res: Response, next: NextFunction) => {
   console.log(`${req.method} Call: ${req.url}`);
-
   next();
 });
+
 
 // load body and files
 app.use(express.json());

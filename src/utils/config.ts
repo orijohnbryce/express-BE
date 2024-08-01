@@ -4,7 +4,7 @@ dotenv.config();
 
 class BaseAppConfig {
   readonly routsPrefix = "/api/v1/";
-
+  readonly doormanKey = "Door-Man-Key"
   readonly dbConfig = {
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD, //(root user no need password)
