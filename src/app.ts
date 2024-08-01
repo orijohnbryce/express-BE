@@ -11,6 +11,7 @@ import { imageRouter } from "./controllers/image-controller";
 import { dbRouter } from "./controllers/db-controller";
 import { boolean } from "joi";
 import doorman from "./middlewares/doorman-middleware";
+import catchAll from "./middlewares/errorHandler";
 
 // create rest-api app
 const app = express();
@@ -36,31 +37,17 @@ app.use("/", orderRouter);
 app.use("/", imageRouter);
 app.use("/", dbRouter); // let init-db by http request
 
+
 // if route not found:
 app.use("*", (req: Request, res: Response, next: NextFunction) => {
   // (using "/" is same as "*", but less clear)
 
   //   res.status(400).send("No rout found");
-  throw new NotFoundError(`Route ${req.url} not exists`);
+  throw new NotFoundError(`Route ${req.url} not exists`);  
 });
 
 // error handler
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-  console.log(
-    `Error ${err.constructor.name} caught by catchAll:  ${err?.message}`
-  );
-
-  logError(err, req); // async. you can choose to await on it
-
-  const status = err.status || 500;
-
-  if (err instanceof AppException) {
-    res.status(status).send(err.message);
-  } else {
-    // don't expose unknown errors to user
-    res.status(status).send("Something is broken!");
-  }
-});
+app.use(catchAll);
 
 // init db if needed.
 // WARNING: initDb is async function.
