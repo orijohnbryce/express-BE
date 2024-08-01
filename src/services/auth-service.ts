@@ -12,7 +12,7 @@ export async function createUser(user: UserModel) {
   let q = `insert into user (username, email, password) values (?, ?, ?)`;
   await runQuery(q, [user.username, user.email, user.password]);
 
-  // get create id
+  // get created id 
   q = "select id from `user` where email=?";
   const res = await runQuery(q, [user.email]);
   user.id = res[0].id;
